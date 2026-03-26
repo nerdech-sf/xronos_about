@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会社概要 | Raklink</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #0fa89e;
+      --teal-dark: #0c8a81;
+      --teal-light: #e6f7f6;
+      --orange: #f07b3f;
+      --ink: #1a2733;
+      --ink-mid: #4a5c6a;
+      --ink-soft: #8a9baa;
+      --surface: #f5f8fa;
+      --white: #ffffff;
+      --border: #dde5ea;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(15,168,158,.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', 'DM Sans', sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo-img { display: flex; align-items: center; text-decoration: none; }
+    .logo-img img { height: 36px; width: auto; display: block; }
+    .back-link {
+      font-size: 13px;
+      color: var(--teal);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity .2s;
+    }
+    .back-link:hover { opacity: .7; }
+
+    /* ── Hero strip ── */
+    .hero-strip {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      padding: 56px 40px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .hero-strip h1 {
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 700;
+      color: var(--white);
+      position: relative;
+    }
+    .hero-strip p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,.75);
+      position: relative;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: fadeUp .5s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Table ── */
+    .profile-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .profile-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .profile-table tr:last-child {
+      border-bottom: none;
+    }
+    .profile-table th {
+      width: 180px;
+      padding: 24px 32px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-mid);
+      background: var(--surface);
+      vertical-align: top;
+      white-space: nowrap;
+    }
+    .profile-table td {
+      padding: 24px 32px;
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.8;
+      vertical-align: top;
+    }
+
+    /* 社名セル */
+    .td-company {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* 登録番号 */
+    .td-reg {
+      font-family: 'DM Sans', monospace;
+      font-size: 14px;
+      color: var(--ink-mid);
+      background: var(--surface);
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      letter-spacing: .5px;
+    }
+
+    /* 事業内容リスト */
+    .business-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .business-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .business-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    /* 設立年 */
+    .td-founded {
+      font-size: 15px;
+      color: var(--ink);
+    }
+    .td-founded .year {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--teal);
+      line-height: 1;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      header { padding: 0 20px; }
+      .hero-strip { padding: 44px 20px 38px; }
+      .profile-table th,
+      .profile-table td { padding: 18px 20px; }
+      .profile-table th {
+        width: 110px;
+        font-size: 12px;
+      }
+      .profile-table td { font-size: 14px; }
+      .td-company { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="logo-img" href="index.html">
+      <img src="Raklink_logo1.png" alt="Raklink">
+    </a>
+    <a class="back-link" href="index.html">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      LPに戻る
+    </a>
+  </header>
+
+  <div class="hero-strip">
+    <div class="hero-tag">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+      </svg>
+      About Us
+    </div>
+    <h1>会社概要</h1>
+    <p>株式会社ハーモニィについて</p>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <table class="profile-table">
+
+        <tr>
+          <th>社名</th>
+          <td class="td-company">株式会社ハーモニィ</td>
+        </tr>
+
+        <tr>
+          <th>適格請求書発行<br>事業者登録番号</th>
+          <td><span class="td-reg">T8180001063888</span></td>
+        </tr>
+
+        <tr>
+          <th>本社住所</th>
+          <td>
+            〒451-0045<br>
+            名古屋市西区名駅三丁目１０番１７号<br>
+            Ｔ名駅ビル２号館
+          </td>
+        </tr>
+
+        <tr>
+          <th>事業内容</th>
+          <td>
+            <ul class="business-list">
+              <li>ビジネスシステムの開発・販売</li>
+              <li>アプリケーション間データ連携システム構築</li>
+              <li>IoTソリューション・可視化サービス</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <th>設立</th>
+          <td class="td-founded">
+            <span class="year">1996</span>
+            10月
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
